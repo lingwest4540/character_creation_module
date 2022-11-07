@@ -1,5 +1,6 @@
 from random import randint
 
+
 DEFAULT_ATTACK = 5
 
 DEFAULT_DEFENCE = 10
@@ -61,9 +62,6 @@ class Healer(Character):
     SPECIAL_BUFF = DEFAULT_DEFENCE + 30
     SPECIAL_SKILL = 'Защита'
 
-warrior = Warrior('Кодослав')
-print(warrior)
-print(warrior.attack())
 
 def choice_char_class(char_name: str) -> Character:
     game_classes={'warrior': Warrior, 'mage': Mage, 'healer': Healer}
@@ -78,3 +76,42 @@ def choice_char_class(char_name: str) -> Character:
                                'или любую другую кнопку, '
                                'чтобы выбрать другого персонажа ').lower()
     return char_class
+
+def start_training(char_class) -> str:
+    
+    
+    print('Потренируйся управлять своими навыками.')
+    print('Введи одну из команд: attack — чтобы атаковать противника, '
+          'defence — чтобы блокировать атаку противника или '
+          'special — чтобы использовать свою суперсилу.')
+    print('Если не хочешь тренироваться, введи команду skip.')
+    
+    while True:
+        commands = {'attack' : char_class.attack(), 'defence' : char_class.defence(), 'special' : char_class.special() }
+        select_input = input('Введи команду: ')
+        if select_input == 'skip':
+            break
+        else:
+            selected_commands = commands[select_input]
+            print(selected_commands)
+    
+        
+            
+    return 'Тренировка окончена.'
+  
+
+            
+
+def main():
+    print('Приветствую тебя, искатель приключений!')
+    print('Прежде чем начать игру...')
+    char_name = input('...назови себя: ')
+    print(f'Здравствуй, {char_name}! '
+          'Сейчас твоя выносливость — 80, атака — 5 и защита — 10.')
+    print('Ты можешь выбрать один из трёх путей силы:')
+    print('Воитель, Маг, Лекарь')
+    char_class = choice_char_class(char_name)
+    print(start_training(char_class))
+
+main()
+
